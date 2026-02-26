@@ -107,7 +107,7 @@ export class UserFormComponent implements OnInit {
   onAdd() {
     if (this.userForm.valid) {
 
-      const createObj: IUser = this.userForm.value;
+      const createObj: IUser = this.userForm.getRawValue();
 
       this._service.onAdd(createObj).subscribe({
         next: () => {
@@ -143,7 +143,7 @@ export class UserFormComponent implements OnInit {
     if (this.userForm.valid) {
 
       let updateObj: IUser = {
-        ...this.userForm.value,
+        ...this.userForm.getRawValue(),
         userId: this.userId
       };
 
