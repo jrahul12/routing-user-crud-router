@@ -1,0 +1,79 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <mat-card class="example-card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img [src]="userObj.profileImage||''"
+                            class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>
+                            userName:- {{userObj.userName}}
+                        </h3>
+                        <h3>
+                            userRole:- {{userObj.userRole}}
+                        </h3>
+                        <h3>
+                            experience Year:- {{userObj.experienceYears}} years
+                        </h3>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button mat-raised-button color="primary" routerLink="edit" class="mr-4">Edit</button>
+                    <button mat-raised-button color="warn" (click)="onRemove()">Delete</button>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-6">
+            <mat-card class="example-card">
+                <h3>
+                    Skills
+                </h3>
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip color="accent" selected *ngFor="let skill of userObj.skills">
+                        {{skill}}
+                    </mat-chip>
+                </mat-chip-list>
+            </mat-card>
+
+            <mat-card class="example-card mt-3">
+                <h1 class="mt-5 align-center">
+                    Address
+                </h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Cureent Address</h2>
+                        <p>
+                            Country:- {{userObj.address.current?.country}}
+                        </p>
+                        <p>
+                            state:- {{userObj.address.current?.state}}
+                        </p>
+                        <p>
+                            City:- {{userObj.address.current?.city}}
+                        </p>
+                        <p>
+                            Zipcode:- {{userObj.address.current?.zipcode}}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Permanant Address</h2>
+                        <p>
+                            Country:- {{userObj.address.permanent?.country}}
+                        </p>
+                        <p>
+                            state:- {{userObj.address.permanent?.state}}
+                        </p>
+                        <p>
+                            City:- {{userObj.address.permanent?.city}}
+                        </p>
+                        <p>
+                            Zipcode:- {{userObj.address.permanent?.zipcode}}
+                        </p>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
