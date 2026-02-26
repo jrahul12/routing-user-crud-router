@@ -25,7 +25,6 @@ export class UserFormComponent implements OnInit {
     private _snackBar: SnackBarService
   ) { }
 
-  // ================= INIT =================
   ngOnInit(): void {
     this.createForm();
     this.patchValueSame();
@@ -35,11 +34,10 @@ export class UserFormComponent implements OnInit {
     if (this.userId) {
       this.patchValueInForm();   // EDIT MODE
     } else {
-      this.AddSkills();          // ADD MODE → show one skill field
+      this.AddSkills();
     }
   }
 
-  // ================= CREATE FORM =================
   createForm() {
     this.userForm = new FormGroup({
       userName: new FormControl(null, Validators.required),
@@ -70,7 +68,6 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  // ================= SAME ADDRESS LOGIC =================
   patchValueSame() {
 
     this.userForm.get('isAddSame')?.valueChanges.subscribe(res => {
@@ -94,23 +91,19 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  // ================= GET FORM ARRAY =================
   get SkillsArr() {
     return this.userForm.get('skills') as FormArray;
   }
 
-  // ================= ADD SKILL =================
   AddSkills() {
     const control = new FormControl(null, Validators.required);
     this.SkillsArr.push(control);
   }
 
-  // ================= REMOVE SKILL =================
   onRemove(i: number) {
     this.SkillsArr.removeAt(i);
   }
 
-  // ================= ADD USER =================
   onAdd() {
     if (this.userForm.valid) {
 
@@ -125,7 +118,6 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  // ================= PATCH DATA IN EDIT MODE =================
   patchValueInForm() {
 
     this._service.fetchById(this.userId).subscribe({
@@ -133,13 +125,11 @@ export class UserFormComponent implements OnInit {
 
         this.isInEditMode = true;
 
-        // Patch normal fields
         this.userForm.patchValue({
           ...data,
           skills: []
         });
 
-        // Patch skills FormArray
         if (data.skills && data.skills.length) {
           this._utilityService.patchFormArr(data.skills, this.SkillsArr);
         } else {
@@ -149,7 +139,6 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  // ================= UPDATE USER =================
   onUpdate() {
     if (this.userForm.valid) {
 
